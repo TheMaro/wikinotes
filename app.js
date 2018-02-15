@@ -4,7 +4,7 @@ const xhr = new XMLHttpRequest()
 // SECTIONS TITLES
 //let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Steve+Jobs&prop=sections'
 // SPECIFIC SECTION
-let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Steve+Jobs&section=1&disableeditsection=true&mobileformat=true'
+let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Mike+Tyson&section=0&disableeditsection=true&mobileformat=true'
 xhr.open('GET', url, true)
 console.log('OPENED', xhr.status);
 

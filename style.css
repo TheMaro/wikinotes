@@ -5,9 +5,14 @@
     padding:15px;
 }
 
+h1 {
+    font-size:3em;
+    font-weight: 600;
+}
+
 h2 {
     font-size:2em;
-    font-weight: 600;
+    font-weight: 300;
     color:white;
     background:black;
     padding:2px 4px;
