@@ -2,4 +2,4 @@
 A small portfolio project
 
 ## Wikipedia viewer
-Something completely different
+Inspired by fCC
