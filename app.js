@@ -4,7 +4,8 @@ const xhr = new XMLHttpRequest()
 // SECTIONS TITLES
 //let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Steve+Jobs&prop=sections'
 // SPECIFIC SECTION
-let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Mike+Tyson&section=0&disableeditsection=true&mobileformat=true'
+let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Mike+Tyson&section=0&disableeditsection=true&mobileformat=true&origin=*'
+
 xhr.open('GET', url, true)
 console.log('OPENED', xhr.status);
 
@@ -21,25 +22,21 @@ xhr.onload = function () {
     var html = data.parse.text['*']
     var output = document.getElementById('output')
     output.innerHTML = html
+    
+    // Call section printing function
     //printSections(data)
     
     
     // REMOVE LINKS FROM WIKI PAGE
     links = output.getElementsByTagName('a')
     for (let i=0; i<links.length; i++) {
-      //links[i].removeAttribute('href')
-      //links[i].outerHTML = links[i].childNodes[0].outerHTML
+      links[i].removeAttribute('href')
     }
-
-    console.log(links[1].children[0])
-    console.log(links[1].childNodes[0].outerHTML)
-    links[0] = links[0].children[0]
-    links[1].outerHTML = links[1].children[0].outerHTML
-    console.log(links[1])
   }
 };
 xhr.send()
 
+// FUNCTION FOR OUTPUTING WIKI PAGE SECTIONS FROM JSON OBJECT
 // function printSections (sections) {
 //   sections.parse.sections.forEach(element => {
 //     document.getElementById('output').innerHTML+=`<li>${element.line}</li>`
