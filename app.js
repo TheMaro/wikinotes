@@ -45,10 +45,23 @@ function addNote (e) {
             <h5 class="card-title">Article: ${test.parse.displaytitle}</h5>
             <p class="card-text" id="notes">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <button id="delete-note">delete</button>
           </div>
         </div>
   `
   document.getElementById('notes').innerHTML += note
+
+  // Add close btn event
+  document.getElementById('notes').addEventListener('click',deleteNote)
+
+  
+}
+
+function deleteNote (e) {
+  if (e.target.id === 'delete-note') {
+    console.log('delete event')
+    e.target.parentElement.parentElement.remove()
+  }
 }
 // FUNCTION FOR OUTPUTING WIKI PAGE SECTIONS FROM JSON OBJECT
 // function printSections (sections) {
