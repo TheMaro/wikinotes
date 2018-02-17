@@ -26,3 +26,18 @@ h3 {
     padding:2px 4px;
 }
 
+a, a:hover {
+    color:#222;
+}
+
+.references {
+    font-size: .7em;
+    background:#333;
+    color:white;
+    padding:0.7em;
+}
+
+.references a {
+    color:white;
+}
+

@@ -4,7 +4,7 @@ const xhr = new XMLHttpRequest()
 // SECTIONS TITLES
 //let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Steve+Jobs&prop=sections'
 // SPECIFIC SECTION
-let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Mike+Tyson&section=0&disableeditsection=true&mobileformat=true&origin=*'
+let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Mike+Tyson&section=10&disableeditsection=true&mobileformat=true&origin=*'
 
 xhr.open('GET', url, true)
 console.log('OPENED', xhr.status);
@@ -36,6 +36,11 @@ xhr.onload = function () {
 };
 xhr.send()
 
+document.getElementById('add-note-btn').addEventListener('click', addNote)
+
+function addNote (e) {
+  document.getElementById('notes').innerHTML = document.getElementById('output').innerHTML
+}
 // FUNCTION FOR OUTPUTING WIKI PAGE SECTIONS FROM JSON OBJECT
 // function printSections (sections) {
 //   sections.parse.sections.forEach(element => {
