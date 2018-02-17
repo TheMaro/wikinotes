@@ -39,7 +39,16 @@ xhr.send()
 document.getElementById('add-note-btn').addEventListener('click', addNote)
 
 function addNote (e) {
-  document.getElementById('notes').innerHTML = document.getElementById('output').innerHTML
+  var note = `
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Article: ${test.parse.displaytitle}</h5>
+            <p class="card-text" id="notes">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+  `
+  document.getElementById('notes').innerHTML += note
 }
 // FUNCTION FOR OUTPUTING WIKI PAGE SECTIONS FROM JSON OBJECT
 // function printSections (sections) {
