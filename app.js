@@ -1,10 +1,10 @@
 const xhr = new XMLHttpRequest()
 // WHOLE PAGE
-// let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Steve+Jobs&prop=text'
+//let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Steve+Jobs&prop=text&origin=*'
 // SECTIONS TITLES
 //let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Steve+Jobs&prop=sections'
 // SPECIFIC SECTION
-let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Mike+Tyson&section=10&disableeditsection=true&mobileformat=true&origin=*'
+let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Mike+Tyson&section=0&disableeditsection=true&mobileformat=true&origin=*'
 
 xhr.open('GET', url, true)
 console.log('OPENED', xhr.status);
@@ -21,17 +21,26 @@ xhr.onload = function () {
     test = data
     var html = data.parse.text['*']
     var output = document.getElementById('output')
-    output.innerHTML = html
     
+    // Clean HTML from styles and extra tags
+    
+    output.innerHTML = html
+    cleanUp(output)
     // Call section printing function
     //printSections(data)
     
     
     // REMOVE LINKS FROM WIKI PAGE
-    links = output.getElementsByTagName('a')
-    for (let i=0; i<links.length; i++) {
-      links[i].removeAttribute('href')
-    }
+    Array.from(output.getElementsByTagName('a')).forEach(item => {
+      item.outerHTML = item.innerHTML
+    })
+    Array.from(output.getElementsByTagName('span')).forEach(item => {
+      item.outerHTML = item.innerHTML
+    })
+    Array.from(output.getElementsByTagName('b')).forEach(item => {
+      item.outerHTML = item.innerHTML
+    })
+    
   }
 };
 xhr.send()
@@ -53,7 +62,7 @@ function addNote (e) {
 
   // Add close btn event
   document.getElementById('notes').addEventListener('click',deleteNote)
-
+  
   
 }
 
@@ -69,3 +78,14 @@ function deleteNote (e) {
 //     document.getElementById('output').innerHTML+=`<li>${element.line}</li>`
 //   });
 // }
+
+// Clean Wiki from all styles and extra HTML
+function cleanUp (html) {
+  Array.from(html.getElementsByClassName('reference')).forEach(item => item.remove())
+  Array.from(html.getElementsByClassName('mw-references-wrap')).forEach(item => item.remove())
+  Array.from(html.getElementsByClassName('hatnote')).forEach(item => item.remove())
+  Array.from(html.getElementsByTagName('a')).forEach(item => item.outerHTML = item.innerHTML)
+  Array.from(html.getElementsByTagName('span')).forEach(item => item.outerHTML = item.innerHTML)
+  Array.from(html.getElementsByTagName('b')).forEach(item => item.outerHTML = item.innerHTML)
+  
+}
