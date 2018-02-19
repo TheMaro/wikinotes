@@ -35,27 +35,6 @@ xhr.onload = function () {
 };
 xhr.send()
 
-document.getElementById('add-note-btn').addEventListener('click', addNote)
-
-function addNote (e) {
-  var note = `
-        <div class="card text-white bg-dark mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Article: ${test.parse.displaytitle}</h5>
-            <p class="card-text" id="notes">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            <button id="delete-note">delete</button>
-          </div>
-        </div>
-  `
-  document.getElementById('notes').innerHTML += note
-
-  // Add close btn event
-  
-  
-  
-  
-}
 document.getElementById('notes').addEventListener('click',deleteNote)
 // Note delete button event function
 function deleteNote (e) {
@@ -68,18 +47,28 @@ function deleteNote (e) {
 // Text highlighter first click
 function getHighlight (e) {
   text = window.getSelection();
-  if (text != '')  {
-      document.getElementById('notes').innerHTML += `
-      <div class="card text-white bg-dark mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Article: ${test.parse.title}</h5>
-            <p class="card-text" id="notes">${text}</p>
-            <button id="delete-note">delete</button>
-          </div>
-        </div>
-      `
-    }
+  // if (text != '')  {
+  //     document.getElementById('notes').innerHTML += `
+  //     <div class="card text-white bg-dark mb-3">
+  //         <div class="card-body">
+  //           <h5 class="card-title">Article: ${test.parse.title}</h5>
+  //           <p class="card-text" id="notes">${text}</p>
+  //           <button id="delete-note">delete</button>
+  //         </div>
+  //       </div>
+  //     `
+  // }
+  showMenu(e)
   text.empty()
+}
+var kopce = ''
+// Show add note popup
+function showMenu (e) {
+  var btn = document.getElementById('add-note-popup')
+  btn.css('top', e.pageY)
+  btn.css('left', e.pageX)
+  kopce = btn
+  btn.css('visibility','visible')
 }
 
 

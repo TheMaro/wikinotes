@@ -20,3 +20,8 @@ a, a:hover {
     color:white;
 }
 
+#add-note-popup {
+    position: absolute;
+    visibility: collapse;
+}
+
