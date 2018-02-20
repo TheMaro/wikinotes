@@ -22,6 +22,8 @@ a, a:hover {
 
 #add-note-popup {
     position: absolute;
-    visibility: collapse;
+    visibility: hidden;
 }
+
+
 

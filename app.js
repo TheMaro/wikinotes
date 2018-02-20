@@ -1,4 +1,5 @@
 const xhr = new XMLHttpRequest()
+var addNoteBtn = document.getElementById('add-note-popup')
 // WHOLE PAGE
 let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Mike+Tyson&prop=text&disableeditsection=true&origin=*'
 // SECTIONS TITLES
@@ -44,6 +45,21 @@ function deleteNote (e) {
   }
 }
 
+addNoteBtn.addEventListener('click',function() {
+  console.log('clicked')
+  if (window.getSelection() != '')  {
+    document.getElementById('notes').innerHTML += `
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Article: ${test.parse.title}</h5>
+          <p class="card-text" id="notes">${window.getSelection()}</p>
+          <button id="delete-note">delete</button>
+        </div>
+      </div>
+    `
+  }
+})
+
 // Text highlighter first click
 function getHighlight (e) {
   text = window.getSelection();
@@ -58,19 +74,29 @@ function getHighlight (e) {
   //       </div>
   //     `
   // }
-  showMenu(e)
+
+  if (text != '') {
+    showMenu(e)
+  } else {
+    hideMenu()
+  }
   text.empty()
 }
-var kopce = ''
+
 // Show add note popup
+
+
+
+
 function showMenu (e) {
-  var btn = document.getElementById('add-note-popup')
-  btn.css('top', e.pageY)
-  btn.css('left', e.pageX)
-  kopce = btn
-  btn.css('visibility','visible')
+  addNoteBtn.style.visibility = 'visible'
+  addNoteBtn.style.top = (e.pageY-50) + 'px'
+  addNoteBtn.style.left = e.pageX + 'px'
 }
 
+function hideMenu (e) {
+  addNoteBtn.style.visibility = 'hidden'
+}
 
 // FUNCTION FOR OUTPUTING WIKI PAGE SECTIONS FROM JSON OBJECT
 // function printSections (sections) {
