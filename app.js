@@ -1,5 +1,4 @@
 const xhr = new XMLHttpRequest()
-var addNoteBtn = document.getElementById('add-note-popup')
 // WHOLE PAGE
 let url = 'https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Mike+Tyson&prop=text&disableeditsection=true&origin=*'
 // SECTIONS TITLES
@@ -14,6 +13,8 @@ xhr.onprogress = function () {
   document.body.output = '<p>Loading resource...</p>'
 };
 
+var addNoteBtn = document.getElementById('add-note-popup')
+
 var test =''
 xhr.onload = function () {
   console.log('Success!',this.status)
@@ -22,7 +23,7 @@ xhr.onload = function () {
     test = data
     var html = data.parse.text['*']
     var output = document.getElementById('output')
-    
+    var outputTitle = document.getElementById('article-title').innerText = data.parse.title
     // Clean HTML from styles and extra tags
     
     output.innerHTML = html
@@ -40,25 +41,15 @@ document.getElementById('notes').addEventListener('click',deleteNote)
 // Note delete button event function
 function deleteNote (e) {
   if (e.target.id === 'delete-note') {
-    console.log('delete event')
-    e.target.parentElement.parentElement.remove()
+    if(confirm('Are you sure you want to remove this note ?')){
+      e.target.parentElement.parentElement.remove()
+    }
+
+    
   }
 }
 
-addNoteBtn.addEventListener('click',function() {
-  console.log('clicked')
-  if (window.getSelection() != '')  {
-    document.getElementById('notes').innerHTML += `
-    <div class="card text-white bg-dark mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Article: ${test.parse.title}</h5>
-          <p class="card-text" id="notes">${window.getSelection()}</p>
-          <button id="delete-note">delete</button>
-        </div>
-      </div>
-    `
-  }
-})
+
 
 // Text highlighter first click
 function getHighlight (e) {
@@ -80,7 +71,23 @@ function getHighlight (e) {
   } else {
     hideMenu()
   }
-  text.empty()
+  addNoteBtn.addEventListener('click',function(e) {
+    console.log('clicked')
+    if (window.getSelection() != '')  {
+      document.getElementById('notes').innerHTML += `
+      <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Article: ${test.parse.title}</h5>
+            <p class="card-text" id="notes">${window.getSelection()}</p>
+            <button id="delete-note">delete</button>
+          </div>
+        </div>
+      `
+    }
+    e.target.style.visibility='hidden'
+    text.empty()
+  })
+  
 }
 
 // Show add note popup
@@ -89,9 +96,9 @@ function getHighlight (e) {
 
 
 function showMenu (e) {
-  addNoteBtn.style.visibility = 'visible'
   addNoteBtn.style.top = (e.pageY-50) + 'px'
   addNoteBtn.style.left = e.pageX + 'px'
+  addNoteBtn.style.visibility = 'visible'
 }
 
 function hideMenu (e) {

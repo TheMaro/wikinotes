@@ -10,17 +10,17 @@
 </head>
 <body>
   <div class="container-fluid" style="height:200px;">
-    <div class="row">
+    <div class="row vh10">
       <div class="col">
         <h1>WikiNotes</h1>
       </div>
     </div>
     <div class="row">
       <div class="col-8">
-        <div class="card border-dark mb-3 output" style="max-width: 100%;">
-          <button id="add-note-popup" type="button" class="col-4 btn btn-warning">Add text</button>
-          <div class="card-header">Article title</div>
-          <div class="card-body text-dark" id="output" style="overflow:hidden;">
+        <div class="card border-secondary mb-3 output" style="max-width: 100%;">
+          <button id="add-note-popup" type="button" class="btn btn-warning">Add text</button>
+          <div id="article-title" class="card-header">Article title</div>
+          <div class="card-body text-dark scroll" id="output" style="overflow:hidden;">
           </div>
         </div>
       </div>
